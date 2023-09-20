@@ -9,11 +9,16 @@ import {
 	TableRow,
 	Title,
 } from "@tremor/react";
-
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../hooks/store";
+import { UserId, deleteUserById } from "../store/users/slice";
 
 export function ListOfUsers() {
-	const users = useSelector((state) => state.users);
+	const users = useAppSelector((state) => state.users);
+	const dispatch = useAppDispatch();
+
+	const handleRemoveUser = (id: UserId) => {
+		dispatch(deleteUserById(id));
+	};
 	return (
 		<Card>
 			<Title>
@@ -51,6 +56,7 @@ export function ListOfUsers() {
 							{/* <TableCell>{item.github}</TableCell> */}
 							<TableCell>
 								<button type="button">
+									{/* rome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
@@ -66,8 +72,10 @@ export function ListOfUsers() {
 										/>
 									</svg>
 								</button>
-								<button type="button">
+								<button onClick={() => handleRemoveUser(item.id)} type="button">
+									{/* rome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 									<svg
+										aria-label="Remove Element"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
 										viewBox="0 0 24 24"
