@@ -10,39 +10,10 @@ import {
 	Title,
 } from "@tremor/react";
 
-const users: {
-	id: string;
-	name: string;
-	email: string;
-	github: string;
-}[] = [
-	{
-		id: "1",
-		name: "Peter Doe",
-		email: "peter@gmail.com",
-		github: "peterdoe",
-	},
-	{
-		id: "2",
-		name: "Papua Ioe",
-		email: "papua@gmail.com",
-		github: "papua ioe",
-	},
-	{
-		id: "3",
-		name: "Paula Susan",
-		email: "paula@gmail.com",
-		github: "paula",
-	},
-	{
-		id: "4",
-		name: "Sharon sanchez",
-		email: "sharon@gmail.com",
-		github: "sharon",
-	},
-];
+import { useSelector } from "react-redux";
 
 export function ListOfUsers() {
+	const users = useSelector((state) => state.users);
 	return (
 		<Card>
 			<Title>
